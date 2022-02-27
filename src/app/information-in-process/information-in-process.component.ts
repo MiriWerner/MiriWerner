@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ControlContainer, Form, FormArray, FormGroup, FormGroupDirective } from '@angular/forms';
 import { DataService } from '../data.service';
 import { NgModule } from '@angular/core';
-import { map } from 'rxjs';
+import { from } from 'rxjs';
 
 
 @Component({
@@ -34,8 +34,9 @@ export class InformationInProcessComponent implements OnInit {
     this.subBy=event;
     this.formArray = this.processFormGroup.control.get('contactPersons') as FormArray;
     let x=0;
-    this.formArray.controls.map(sub => {
-      if (sub.get('type')?.get('value')?.value === this.subBy) {
+    const number$ = from(this.formArray.controls);
+    number$.subscribe(exist=>{
+      if(exist.get('type')?.get('value')?.value === this.subBy) {
         x++;
       }
     });
