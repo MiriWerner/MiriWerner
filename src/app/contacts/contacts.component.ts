@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ControlContainer, FormArray, FormGroup, FormGroupDirective, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { DataService } from '../data.service';
-import { takeUntil, of, map } from 'rxjs';
+import { from } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -27,9 +27,11 @@ export class ContactsComponent implements OnInit {
     }
   }
   putValue() {  
-    this.submitedBy.forEach(sub => {
-      if (sub.value === this.Value)
-        this.Code = sub.code;
+    this.Value=this.newContact.get('type')?.get('value')?.value;
+    const submited$ = from(this.submitedBy);
+    submited$.subscribe(sub=>{
+      if (sub.value ===this.Value )
+      this.Code = sub.code;
     })
     console.log(this.newContact.value);
   }
