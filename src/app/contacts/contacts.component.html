@@ -1,0 +1,67 @@
+<div [formGroup]="form">
+    <span [hidden]="true" *ngIf="refreshContacts()"></span>
+    <app-concentration-of-contacts [changed]="change" formGroupName="insured"></app-concentration-of-contacts> 
+    <div class="direct">
+    <div class="largeSpan">אנשי קשר</div>
+    <ng-container formArrayName="contactPersons">
+        <div *ngFor="let c of formArray.controls; let i=index" [formGroupName]="i">
+            <ng-container  class="direct">
+                <div>
+                    <span class="span">  מועדף  </span>
+                    <input  disabled="true" type="checkbox" formControlName="deliveryFlag">
+                    <span class="span">  שם איש קשר  </span>
+                    <input class="text1" disabled="true"  type="text"
+                        formControlName="name">
+                    <span class="span">  סוג  </span>
+                    <ng-container  formGroupName="type">
+                         <span style="width: 110px !important; border-width: 2px;" class="text1"> {{this.formArray.controls[i].get('type').get('value').value}}</span>
+                    </ng-container>
+                    <span class="span">  כתובת  </span>
+                    <input class="text1" disabled="true" type="text" formControlName="address">
+                    <span class="span">  טלפון נייד  </span>
+                    <input class="text1" disabled="true" required type="number" maxlength="10" value="0"
+                        formControlName="phoneNumber">
+                    <span class="span">  דוא"ל  </span>
+                    <input class="text1" disabled="true" type="email" formControlName="email"
+                        >
+
+                </div>
+            </ng-container>
+        </div>
+    </ng-container>
+    <div [hidden]="!addContact">
+        <ng-container [formGroup]="newContact" class="direct">
+            <div>
+                <span class="span">  מועדף  </span>
+                <input  type="checkbox" formControlName="deliveryFlag">
+                <span class="span">  שם איש קשר  </span>
+                <input class="text"  type="text" formControlName="name">
+                <span class="span">  סוג  </span>
+                <ng-container formGroupName="type">
+                    <select class="text" formControlName="value" (change)="putValue()" [(ngModel)]="Value">
+                        <option  *ngFor="let type of submitedBy">
+                            {{type.value}}
+                        </option>
+                    </select>
+                </ng-container>
+                <span class="span">  כתובת  </span>
+                <input class="text" type="text" formControlName="address">
+                <span class="span">  טלפון נייד  </span>
+                <input class="text" type="tel" (keypress)="numberOnly($event)" maxlength="11" value="0" formControlName="phoneNumber" onkeyup="
+                var v = this.value;
+                if(v.match(/^\d{3}$/) !==null){
+                    this.value = v +'-';
+                }
+                ">
+                <span class="span">  דוא"ל  </span>
+                <input class="text" type="email" formControlName="email"
+                    >
+                
+                    <input type="button" value="+" (click)="add()">
+             
+            </div>
+        </ng-container>
+    </div>
+    <div class="text" style="margin-top: 2%;margin-bottom: 1.5%;margin-right: 0% !important;"  (click)="adding()">הוסף איש קשר</div>
+    <!-- <div>{{newContact.value | json}}</div> -->
+    </div>

@@ -1,0 +1,61 @@
+<ng-container [formGroup]="form">
+    <div class="direct">
+        <span class="largeSpan">ריכז מידע בתהליך</span>
+        <div style="margin-top: 1.5%;">
+            <div formGroupName="insured">
+                <span class="span">פרטי מבוטח:</span>
+                <span class="span">שם פרטי:</span>
+                <input class="text" type="text" formControlName="firstName">
+                <span class="span">שם פרטי:</span>
+                <input class="text" type="text" formControlName="lastName">
+                <span class="span">תז:</span>
+                <input class="text" type="text" formControlName="identity">
+                <span class="span">גיל:</span>
+                <input class="text" type="text" formControlName="age">
+                <ng-container formGroupName="address">
+                    <span class="span">כתובת</span>
+                    רחוב:
+                    <input class="text" type="text" formControlName="streetName">
+                    עיר:
+                    <input class="text" type="text" formControlName="cityName">
+                </ng-container>
+            </div>
+            <div style="margin-top: 1.5%;" formGroupName="superClaim">
+                <span class="span">סוג תביעת על:</span>
+                <ng-container formGroupName="superClaimStatus">
+                    <select class="text" formControlName="value" (ngModelChange)="claimNo()" required>
+                        <option *ngFor="let claim of superClaimType">
+                            {{claim.value}}
+                        </option>
+                    </select>
+                </ng-container>
+                <span class="span">תאריך אירוע</span>
+                <input class="text" type="date" required>
+                <span class="span" class="span">סיבת אירוע:</span>
+                <select class="text" (change)="toEnable()" required>
+                    <option *ngFor="let cause of claimCause">
+                        {{cause.value}}
+                    </option>
+                </select>
+                <span class="span"> מהות אירוע:</span>
+                <select class="text" [disabled]="!enable">
+                    <option *ngFor="let injury of injuryType">
+                        {{injury.value}}
+                    </option>
+                </select>
+                <span class="span">תביעה הוגשה באמצעות:</span>
+                <select class="text" required (change)="isExists($any($event.target).value)">
+                    <option *ngFor="let submit of submitedBy">
+                        {{submit.value}}
+                    </option>
+                </select>
+                <span class="span">אופן קבלת התביעה:</span>
+                <select class="text">
+                    <option class="text" *ngFor="let submition of submitionMethod">
+                        {{submition.value}}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+</ng-container>

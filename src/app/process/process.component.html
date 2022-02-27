@@ -1,0 +1,17 @@
+<div class="direct">
+    <ng-container class="form" [formGroup]="processForm">
+        <ng-container formGroupName="superClaim">
+            <span class="span">תביעת על:</span>
+            <input  class="text" type="text" formControlName="superClaimNum" >
+            <span  class="span">מצב תביעה:</span>
+            <ng-container formGroupName="superClaimStatus">
+                <input class="text" value="value"  type="text" formControlName="value" >
+            </ng-container>
+            <input class="button" style="margin-right: 5%!important;"  type="button" value="רענון תהליך" (click)="refreshProcess()">
+        </ng-container>
+      
+        <app-information-in-process formGroupName="superClaim"></app-information-in-process>
+        <app-contacts [refresh]="refresh" formArrayName="contactPersons"></app-contacts>
+        <input style="margin-top: 2%;" class="button" type="button" value="המשך" (click)="proceed()" [disabled]="!validateForm()">
+    </ng-container>
+</div>

@@ -1,0 +1,30 @@
+.direct{
+    direction: rtl;
+    margin-top: 2%;
+    border: rgb(2, 2, 70) solid 2px;
+    padding: 2%;
+}
+.form{
+    margin-right: 1% !important;
+}
+.span{
+    font-size: 16px;
+    font-weight: bold;
+}
+.text{
+    border: rgb(3, 3, 80) solid 2px;
+    width: 110px !important;
+    margin-right: 0.5%!important;
+    margin-left: 0.5% !important;
+    text-align: center;
+}
+.button{
+    width: 90px !important;
+    border: rgb(3, 3, 80) solid 2px;
+    color: rgb(3, 3, 80) ;
+    background-color:rgb(239, 239, 239)!important;
+}
+.largeSpan{
+    font-size: 22px;
+    font-weight: bold;
+}
