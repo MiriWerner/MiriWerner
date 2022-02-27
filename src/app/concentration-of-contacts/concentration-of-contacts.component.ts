@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
 import { DataService } from '../data.service';
-import { pipe,map } from 'rxjs';
+import { from} from 'rxjs';
 
 @Component({
   selector: 'app-concentration-of-contacts',
@@ -63,9 +63,10 @@ export class ConcentrationOfContactsComponent implements OnInit {
   }
   deleteNotDelivery() {
     let x = 0;
-    this.formArray.controls.map(element => {
-      if (element.get('deliveryFlag')?.value !== true) {
-        this.formArray.removeAt(x);
+    const number$ = from(this.formArray.controls); 
+    number$.subscribe(element=>{
+      if(element.get('deliveryFlag')?.value !== true) {
+          this.formArray.removeAt(x);
       }
       x++;
     });
